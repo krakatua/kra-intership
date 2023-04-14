@@ -1,6 +1,6 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
 import EthImage from "../images/ethereum.svg";
-import { Link, Route, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import nftImage from "../images/nftImage.jpg";
 import axios from "axios";
@@ -28,8 +28,6 @@ const ItemDetails = () => {
     fetchPost()
   }, [])
 
-  
-  const parameter = "33988060";
 
 
   return (

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Swiper, { A11y, Navigation } from "swiper";
-import { SwiperSlide } from "swiper/react";
 
 const NewItems = () => {
 
