@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -12,6 +12,7 @@ import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
 
+  let navigate = useNavigate()
   const [loading, setLoading] = useState()
   const [userData, setUserData] = useState([]);
 
@@ -20,6 +21,7 @@ const HotCollections = () => {
     const { data } = await axios.get('https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections')
     setUserData(data)
     setLoading(false)
+    console.log(data)
   }
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const HotCollections = () => {
             )
             )) : (userData.map((user) => (
               <SwiperSlide key={user.id}>
-                <div className="col-lg-10 col-md-8 col-sm-10 col-xs-12 offset-lg-1" >
+                <div className="col-lg-10 col-md-8 col-sm-10 col-xs-12 offset-lg-1" onClick={() => navigate(`item-details/${user.nftId}`)} >
                   <div className="nft_coll">
                     <div className="nft_wrap">
                       <Link to="/item-details">

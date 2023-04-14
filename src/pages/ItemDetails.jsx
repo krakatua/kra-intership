@@ -1,29 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import EthImage from "../images/ethereum.svg";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Route, useNavigate, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import nftImage from "../images/nftImage.jpg";
 import axios from "axios";
 
+
 const ItemDetails = () => {
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { id } = useParams();
-  let navigate = useNavigate()
-  const [posts, setPost] = useState([])
-  const [searchId, setSearchId] = useState(id)
+  const {nftId} = useParams();
+  const [posts, setPost] = useState([]);
+  console.log(JSON.stringify(nftId))
+  
 
-  async function fetchPost(nftId) {
-    const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections/nftId=${nftId || id}`)
+  async function fetchPost() {
+    const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`)
     setPost(data)
-    console.log(data)
   }
-
   useEffect(() => {
+    
+    
     fetchPost()
   }, [])
+
+  
+  const parameter = "33988060";
+
 
   return (
   
@@ -33,7 +40,10 @@ const ItemDetails = () => {
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
             <div className="row">
-              {posts.map((post) => (
+
+              {posts.filter((post) => (
+                post.nftId === nftId
+              )).map((post) =>( 
                 <div className="col-md-6 text-center">
                 <img
                   src={post.nftImage}
@@ -42,6 +52,7 @@ const ItemDetails = () => {
                 />
               </div>
               ))}
+               
               <div className="col-md-6 text-center">
                 <img
                   src={nftImage}
