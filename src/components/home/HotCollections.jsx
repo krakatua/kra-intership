@@ -56,7 +56,7 @@ const HotCollections = () => {
             )
             )) : (userData.map((user) => (
               <SwiperSlide key={user.id}>
-                <div className="col-lg-10 col-md-8 col-sm-10 col-xs-12 offset-lg-1" onClick={() => navigate(`item-details/${user.nftId}`)} >
+                <div className="col-lg-10 col-md-8 col-sm-10 col-xs-12 offset-lg-1" onClick={() => navigate(`/${user.nftId}`)} >
                   <div className="nft_coll">
                     <div className="nft_wrap">
                       <Link to="/item-details">
