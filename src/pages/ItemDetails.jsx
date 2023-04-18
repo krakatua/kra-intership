@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import EthImage from "../images/ethereum.svg";
+import Skeleton from "../components/UI/Skeleton";
 
 
 const ItemDetails = () => {
@@ -12,13 +13,14 @@ const ItemDetails = () => {
   }, []);
   const { id } = useParams();
   const [posts, setPost] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
 
   async function fetchPost() {
     const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`)
     setPost(data)
-
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -36,6 +38,71 @@ const ItemDetails = () => {
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
         <section aria-label="section" className="mt90 sm-mt-0">
+        {loading ? (
+            <div className='container'>
+              <div className='row'>
+                <div className='col-md-6 text-center'>
+                  <Skeleton width={`100%`} height={`100%`} />
+                </div>
+                <div className='col-md-6'>
+                  <div className='item_info'>
+                    <h2>
+                      <Skeleton width={`500px`} height={`50px`} />
+                    </h2>
+
+                    <div className='item_info_counts'>
+                      <Skeleton width={`75px`} height={`30px`} />
+
+                      <Skeleton width={`75px`} height={`30px`} />
+                    </div>
+
+                    <Skeleton width={`500px`} height={`100px`} />
+
+                    <div className='d-flex flex-row'>
+                      <div className='mr40'>
+                        <h6>Owner</h6>
+                        <div className='item_author'>
+                          <div className='author_list_pp'>
+                            <Skeleton
+                              width={`50px`}
+                              height={`50px`}
+                              borderRadius={`50%`}
+                            />
+                          </div>
+                          <div className='author_list_info'>
+                            <Skeleton width={`90px`} height={`20px`} />
+                          </div>
+                        </div>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div className='de_tab tab_simple'>
+                      <div className='de_tab_content'>
+                        <h6>Creator</h6>
+                        <div className='item_author'>
+                          <div className='author_list_pp'>
+                            <Skeleton
+                              width={`50px`}
+                              height={`50px`}
+                              borderRadius={`50%`}
+                            />
+                          </div>
+                          <div className='author_list_info'>
+                            <Skeleton width={`90px`} height={`20px`} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className='spacer-40'></div>
+                      <h6>Price</h6>
+                      <div className='nft-item-price'>
+                        <Skeleton width={`120px`} height={`50px`} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
           <div className="container">
             <div className="row">
               <div className="col-md-6 text-center">
@@ -105,7 +172,9 @@ const ItemDetails = () => {
               </div>
             </div>
           </div>
+          )}
         </section>
+        
       </div>
     </div>
 
