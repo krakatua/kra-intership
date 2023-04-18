@@ -85,9 +85,19 @@ const NewItems = () => {
                       </Link>
                     </div>
                     
+                    {item.expiryDate ? (
                       <div className='de_countdown'>
-                      {item.expiryDate}
+                        {calMilisecond(item.expiryDate) > 0 ? (
+                          <>
+                            <CountdownTimer expiryDate={item.expiryDate} />
+                          </>
+                        ) : (
+                          <>Expired</>
+                        )}
                       </div>
+                    ) : (
+                      <></>
+                    )}
                     
 
                     <div className='nft__item_wrap'>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
+import CountdownTimer from "../UI/CountdownTimer";
 
 const ExploreItems = () => {
 
@@ -82,9 +83,19 @@ const ExploreItems = () => {
                     <i className='fa fa-check'></i>
                   </Link>
                 </div>
-                <div className='de_countdown'>
-                  {item.expiryDate}
-                </div>
+                {item.expiryDate ? (
+                      <div className='de_countdown'>
+                        {calMilisecond(item.expiryDate) > 0 ? (
+                          <>
+                            <CountdownTimer expiryDate={item.expiryDate} />
+                          </>
+                        ) : (
+                          <>Expired</>
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
                 <div className='nft__item_wrap'>
                   <div className='nft__item_extra'>

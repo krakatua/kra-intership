@@ -14,7 +14,6 @@ const TopSellers = () => {
     fetchSellers()
   }, [])
 
-  console.log(userSellers)
 
 
   return (
