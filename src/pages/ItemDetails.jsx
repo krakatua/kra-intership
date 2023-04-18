@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import EthImage from "../images/ethereum.svg";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 
@@ -12,7 +11,6 @@ const ItemDetails = () => {
   }, []);
   const { nftId } = useParams();
   const [posts, setPost] = useState([]);
-  console.log(nftId)
 
 
 
@@ -20,26 +18,24 @@ const ItemDetails = () => {
     const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`)
     setPost(data)
     //data.filter(x => x.nftId === nftId).map(x=> console.log(x))
+    for (let i = 0; i < data.length; i++) {
+      const obj = data[i];
+      const nftTarget = obj.nftId;
+      if (nftTarget === nftId) {
+        console.log(obj)
+      }
+    }
+
   }
+
+
+
   useEffect(() => {
     fetchPost()
   }, [])
 
-    
-
-  for (let i = 0; i < posts.length; i++) {
-    if (posts[i].nftId === nftId) {
-      console.log(posts[i])
-    }
-  }
-
- 
-
-  
 
 
-
- 
 
 
   return (
